@@ -12,9 +12,9 @@ class TranslatorManager {
     
     static let shared = TranslatorManager()
     
-    let key = "trnsl.1.1.20180820T160135Z.8171bbe6a94bdc24.d0309e06282d767930e40cf640e2c702e83c344a"
-    let getLangsUrl = "https://translate.yandex.net/api/v1.5/tr.json/getLangs"
-    let translateUrl = "https://translate.yandex.net/api/v1.5/tr.json/translate"
+    private let key = "trnsl.1.1.20180820T160135Z.8171bbe6a94bdc24.d0309e06282d767930e40cf640e2c702e83c344a"
+    private let getLangsUrl = "https://translate.yandex.net/api/v1.5/tr.json/getLangs"
+    private let translateUrl = "https://translate.yandex.net/api/v1.5/tr.json/translate"
     
     func getTranslate(text: String, lang: String, completion: @escaping (Translation?) -> Void) {
 

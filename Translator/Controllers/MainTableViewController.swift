@@ -11,8 +11,6 @@ import CoreData
 
 class MainTableViewController: UITableViewController {
     
-    var translate: Translation?
-    var langs: Languages?
     var sourceLang: String?
     var targetLang: String?
     var dictOfLangs: [String: String]?
@@ -162,7 +160,6 @@ class MainTableViewController: UITableViewController {
     @IBAction func clearTapped(_ sender: UIButton) {
         originalText.text = ""
         translationText.text = ""
-        translate = nil
         history = nil
     }
     
