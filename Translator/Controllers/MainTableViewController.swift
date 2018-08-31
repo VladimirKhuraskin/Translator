@@ -18,7 +18,6 @@ class MainTableViewController: UITableViewController {
     var tappedLang: String?
     var history: [History]?
     
-    
     @IBOutlet weak var originalText: UITextView!
     @IBOutlet weak var translationText: UITextView!
     @IBOutlet weak var source: UIBarButtonItem!
@@ -26,36 +25,31 @@ class MainTableViewController: UITableViewController {
     
     func getLangList() {
         TranslatorManager.shared.getAvailableLangs { langs in
-            DispatchQueue.main.async {
-                if let langs = langs {
-                    self.dictOfLangs = langs.langs
-                    for (_, value) in self.dictOfLangs! {
-                        self.availabelLang.append(value)
-                    }
-                } else {
-                    self.dictOfLangs = [:]
+            DispatchQueue.global().async {
+                guard let langs = langs else { return }
+                self.dictOfLangs = langs.langs
+                for (_, value) in self.dictOfLangs! {
+                    self.availabelLang.append(value)
                 }
             }
         }
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        if let history = history {
-            originalText.text = history[0].originalText
-            translationText.text = history[0].translationText
-            sourceLang = history[0].sourceLang
-            targetLang = history[0].targetLang
-            source.title = history[0].sourceLang
-            target.title = history[0].targetLang
-        }
+        super.viewWillAppear(animated)
+        guard let history = history else { return }
+        originalText.text = history[0].originalText
+        translationText.text = history[0].translationText
+        sourceLang = history[0].sourceLang
+        targetLang = history[0].targetLang
+        source.title = history[0].sourceLang
+        target.title = history[0].targetLang
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         title = "⇄"
         getLangList()
-        translationText?.layer.cornerRadius = 15
-        translationText?.layer.masksToBounds = true
         self.navigationItem.backBarButtonItem = UIBarButtonItem(title: "Back", style: .plain, target: nil, action: nil)
     }
     
