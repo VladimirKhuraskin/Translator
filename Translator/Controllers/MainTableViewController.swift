@@ -16,7 +16,7 @@ class MainTableViewController: UITableViewController {
     var dictOfLangs: [String: String]?
     var availabelLang = [String]()
     var tappedLang: String?
-    var history: [History]?
+    var history: History?
     
     @IBOutlet weak var originalText: UITextView!
     @IBOutlet weak var translationText: UITextView!
@@ -38,12 +38,12 @@ class MainTableViewController: UITableViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         guard let history = history else { return }
-        originalText.text = history[0].originalText
-        translationText.text = history[0].translationText
-        sourceLang = history[0].sourceLang
-        targetLang = history[0].targetLang
-        source.title = history[0].sourceLang
-        target.title = history[0].targetLang
+        originalText.text = history.originalText
+        translationText.text = history.translationText
+        sourceLang = history.sourceLang
+        targetLang = history.targetLang
+        source.title = history.sourceLang
+        target.title = history.targetLang
     }
     
     override func viewDidLoad() {
@@ -73,23 +73,6 @@ class MainTableViewController: UITableViewController {
             }
         }
         return code1 + "-" + code2
-    }
-    
-    func saveTranslationInHistory(lang: String, sourceLang: String, targetLang: String, originalText: String, translationText: String) {
-        let appDelegate = UIApplication.shared.delegate as! AppDelegate
-        let context = appDelegate.persistentContainer.viewContext
-        let entity = NSEntityDescription.entity(forEntityName: "History", in: context)
-        let historyObject = NSManagedObject(entity: entity!, insertInto: context) as! History
-        historyObject.lang = lang
-        historyObject.sourceLang = sourceLang
-        historyObject.targetLang = targetLang
-        historyObject.originalText = originalText
-        historyObject.translationText = translationText
-        do {
-            try context.save()
-        } catch {
-            print(error.localizedDescription)
-        }
     }
     
     @IBAction func close(segue: UIStoryboardSegue) {
@@ -141,7 +124,7 @@ class MainTableViewController: UITableViewController {
                     return
                 }
                 self.translationText.text = translation.text[0]
-                self.saveTranslationInHistory(lang: lang, sourceLang: sourceLang, targetLang: targetLang, originalText: text, translationText: translation.text[0])
+                CoreDataManager.shared.save(sourceLang: sourceLang, targetLang: targetLang, originalText: text, translationText: translation.text[0])
                 let code = translation.code
                 if code != 200 {
                     let error = TranslatorManager.shared.errorHandler(code: code)

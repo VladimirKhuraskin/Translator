@@ -12,17 +12,12 @@ import CoreData
 class HistoryTableViewController: UITableViewController {
     
     var history = [History]()
-    var historyElement = [History]()
-    let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
+    var historyElement = History()
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        let fetchRequest: NSFetchRequest<History> = History.fetchRequest()
-        do {
-            history = try context.fetch(fetchRequest)
-        } catch {
-            print(error.localizedDescription)
-        }
+        guard let history = CoreDataManager.shared.fetchHistory() else { return }
+        self.history = history
     }
     
     override func viewDidLoad() {
@@ -50,7 +45,7 @@ class HistoryTableViewController: UITableViewController {
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        historyElement.append(history[indexPath.row])
+        historyElement = history[indexPath.row]
         tableView.deselectRow(at: indexPath, animated: true)
         performSegue(withIdentifier: "unwindFromHistorySegue", sender: nil)
     }
@@ -62,14 +57,9 @@ class HistoryTableViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
         let objectToDelete = history[indexPath.row]
         guard editingStyle == .delete else { return }
-        context.delete(objectToDelete)
-        do {
-            try context.save()
-            history.remove(at: indexPath.row)
-            tableView.deleteRows(at: [indexPath], with: .fade)
-        } catch {
-            print(error.localizedDescription)
-        }
+        CoreDataManager.shared.delete(fromHistory: objectToDelete)
+        history.remove(at: indexPath.row)
+        tableView.deleteRows(at: [indexPath], with: .fade)
     }
     
 }

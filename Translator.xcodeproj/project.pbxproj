@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		150241DC2131DD1700CC3ABA /* HistoryTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 150241DB2131DD1700CC3ABA /* HistoryTableViewCell.swift */; };
 		150E0E0621331AC800D9D2D2 /* .gitignore in Resources */ = {isa = PBXBuildFile; fileRef = 150E0E0521331AC800D9D2D2 /* .gitignore */; };
+		1512CBC5213D8B40000F998D /* CoreDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1512CBC4213D8B40000F998D /* CoreDataManager.swift */; };
 		157C9603212B1F75004C7237 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 157C9602212B1F75004C7237 /* AppDelegate.swift */; };
 		157C9608212B1F75004C7237 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 157C9606212B1F75004C7237 /* Main.storyboard */; };
 		157C960B212B1F75004C7237 /* Translator.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 157C9609212B1F75004C7237 /* Translator.xcdatamodeld */; };
@@ -25,6 +26,7 @@
 /* Begin PBXFileReference section */
 		150241DB2131DD1700CC3ABA /* HistoryTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryTableViewCell.swift; sourceTree = "<group>"; };
 		150E0E0521331AC800D9D2D2 /* .gitignore */ = {isa = PBXFileReference; lastKnownFileType = text; path = .gitignore; sourceTree = "<group>"; };
+		1512CBC4213D8B40000F998D /* CoreDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataManager.swift; sourceTree = "<group>"; };
 		157C95FF212B1F75004C7237 /* Translator.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Translator.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		157C9602212B1F75004C7237 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		157C9607212B1F75004C7237 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -95,6 +97,7 @@
 		1599E3502131BC96003648E1 /* Core Data */ = {
 			isa = PBXGroup;
 			children = (
+				1512CBC4213D8B40000F998D /* CoreDataManager.swift */,
 				157C9609212B1F75004C7237 /* Translator.xcdatamodeld */,
 			);
 			path = "Core Data";
@@ -208,6 +211,7 @@
 				157C9603212B1F75004C7237 /* AppDelegate.swift in Sources */,
 				15D3E341212C6A7A004BD352 /* Translation.swift in Sources */,
 				15F8F810212F30B600EB04FA /* LangTableViewController.swift in Sources */,
+				1512CBC5213D8B40000F998D /* CoreDataManager.swift in Sources */,
 				15F8F80E212F08BC00EB04FA /* Languages.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
